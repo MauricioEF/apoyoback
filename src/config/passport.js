@@ -2,7 +2,7 @@ import config from "./config.js";
 import passport from 'passport';
 import local from 'passport-local';
 import jwt  from 'passport-jwt';
-import { userService } from "../services/services.js";
+import { cartService, userService } from "../services/services.js";
 import { cookieExtractor,createHash,isValidPassword } from "../utils.js";
 const LocalStrategy = local.Strategy;
 const JWTStrategy =  jwt.Strategy;
@@ -15,6 +15,7 @@ const initializePassport = () =>{
             if(!req.file) return done(null,false,{messages:"Couldn't get picture for user"})
             let user  = await userService.getBy({email:email})
             if(user) return done(null,false,{messages:"User Already exists"});
+            let cart = await cartService.save({products:[]})
             const newUser ={
                 first_name,
                 last_name,
@@ -22,6 +23,7 @@ const initializePassport = () =>{
                 phone,
                 password:createHash(password),
                 role:"user",
+                cart: cart._id,
                 profile_picture:req.file.location
             }
             let result = await userService.save(newUser);

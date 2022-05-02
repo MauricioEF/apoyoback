@@ -4,6 +4,6 @@ const router = express.Router();
 
 
 router.get('/',productsController.getAllProducts);
+router.get('/:pid',productsController.getProductById)
 
-
-console.log(router);
+export default router;

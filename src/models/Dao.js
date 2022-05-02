@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import User from './User.js';
 import Product from './Product.js';
+import Cart from './Cart.js'
 export default class Dao {
     constructor(config){
         this.mongoose= mongoose.connect(config.url,{useNewUrlParser:true}).catch(error=>{
@@ -10,9 +11,12 @@ export default class Dao {
         const timestamp = {timestamps:{createdAt:'created_at',updatedAt:'updated_at'}};
         const userSchema = mongoose.Schema(User.schema,timestamp);
         const productSchema = mongoose.Schema(Product.schema,timestamp);
+        const cartSchema = mongoose.Schema(Cart.schema,timestamp);
+
         this.models ={
             [User.model]:mongoose.model(User.model,userSchema),
-            [Product.model]:mongoose.model(Product.model,productSchema)
+            [Product.model]:mongoose.model(Product.model,productSchema),
+            [Cart.model]:mongoose.model(Cart.model,cartSchema)
         }
     }
     findOne = async(options,entity)=>{
