@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import User from './User.js';
 import Product from './Product.js';
 import Cart from './Cart.js'
+import Message from './Message.js'
 export default class Dao {
     constructor(config){
         this.mongoose= mongoose.connect(config.url,{useNewUrlParser:true}).catch(error=>{
@@ -12,11 +13,13 @@ export default class Dao {
         const userSchema = mongoose.Schema(User.schema,timestamp);
         const productSchema = mongoose.Schema(Product.schema,timestamp);
         const cartSchema = mongoose.Schema(Cart.schema,timestamp);
+        const messageSchema = mongoose.Schema(Message.schema,timestamp);
 
         this.models ={
             [User.model]:mongoose.model(User.model,userSchema),
             [Product.model]:mongoose.model(Product.model,productSchema),
-            [Cart.model]:mongoose.model(Cart.model,cartSchema)
+            [Cart.model]:mongoose.model(Cart.model,cartSchema),
+            [Message.model]:mongoose.model(Message.model,messageSchema)
         }
     }
     findOne = async(options,entity)=>{
