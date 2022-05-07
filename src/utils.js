@@ -16,7 +16,7 @@ export const cookieExtractor = req =>{
     let token = null;
     if (req && req.cookies)
     {
-        token = req.cookies[config.jwt.cookie];
+        token = req.cookies[config.jwt.cookie_name];
     }
     return token;
 }

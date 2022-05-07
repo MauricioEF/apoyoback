@@ -5,7 +5,7 @@ import Cart from './Cart.js'
 import Message from './Message.js'
 export default class Dao {
     constructor(config){
-        this.mongoose= mongoose.connect(config.url,{useNewUrlParser:true}).catch(error=>{
+        this.mongoose= mongoose.connect(config.url,{useNewUrlParser:true,useUnifiedTopology:true}).catch(error=>{
             console.error(error);
             process.exit();
         })

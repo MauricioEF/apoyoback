@@ -24,13 +24,14 @@ router.post('/login',passportCall('login'),(req,res)=>{
         user=req.user;
     }
     let token = jwt.sign(user,config.jwt.secret)
-    res.cookie(config.jwt.cookie,token,{
-        httpOnly:true,
-        maxAge:60*60*1000
-    })
     res.cookie('sessionCookie','boom',{
         maxAge:60*60*1000
     })
+    res.cookie(config.jwt.cookie_name,token,{
+        httpOnly:true,
+        maxAge:60*60*1000
+    })
+
     res.send({status:"success",payload:{user}})
 })
 export default router;
