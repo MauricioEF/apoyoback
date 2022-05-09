@@ -35,8 +35,8 @@ export const passportCall = (strategy) =>{
 }
 
 const s3 = new aws.S3({
-    accessKeyId:config.aws.ACCESS_KEY,
-    secretAccessKey:config.aws.SECRET
+    accessKeyId:config.aws.access_key,
+    secretAccessKey:config.aws.secret
 })
 
 
