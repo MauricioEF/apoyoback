@@ -15,7 +15,11 @@ export default class Product{
             price:Number,
             code:String,
             stock:Number,
-            thumbnail:String
+            thumbnail:String,
+            status:{
+                type:String,
+                default:"available"
+            }
         }
     }
 }
